@@ -1,6 +1,6 @@
-import { Text } from 'react-native';
 import { useLayoutEffect } from 'react';
 import IconButton from '../components/IconButton';
+import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput';
 
 function RecentExpenses({route,navigation}){
   function addPressed(){
@@ -14,6 +14,6 @@ function RecentExpenses({route,navigation}){
     })
   },[navigation]);
 
-  return <Text>Recent Expenses</Text>
+  return <ExpensesOutput expensesPeriod="Last 7 Days"/>
 }
 export default RecentExpenses;
