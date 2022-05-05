@@ -8,15 +8,23 @@ import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
 import ManageExpenses from './screens/ManageExpenses';
 import { Ionicons } from '@expo/vector-icons';
+import IconButton from './components/IconButton';
 import { GlobalStyles } from './constants/styles';
 
 const BottomBar = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function ExpensesOverview(){
-  return <BottomBar.Navigator screenOptions={{
-    headerStyle:{ backgroundColor:GlobalStyles.colors.primary500}, headerTintColor:'white', tabBarStyle:{backgroundColor:GlobalStyles.colors.primary500}, tabBarActiveTintColor:'#EFE927'
-  }}>
+  return <BottomBar.Navigator screenOptions={({navigation})=>({
+    headerStyle:{ backgroundColor:GlobalStyles.colors.primary500}, 
+    headerTintColor:'white', 
+    tabBarStyle:{backgroundColor:GlobalStyles.colors.primary500}, 
+    tabBarActiveTintColor:'#EFE927',
+    headerRight:({tintColor})=>(
+      <IconButton icon='add' color={tintColor} size={24} onPress={()=>{ navigation.navigate('ManageExpense',{mode:'add'}) }}/>
+    )
+  })}
+  >
     <BottomBar.Screen name="Recent" component={RecentExpenses} options={{
       tabBarIcon:({color,size}) => <Ionicons color={color} size={size} name="hourglass"/>,
       tabBarItemStyle:{backgroundColor:'#3518b7'},
