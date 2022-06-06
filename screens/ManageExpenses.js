@@ -4,6 +4,7 @@ import { useLayoutEffect, useContext } from 'react';
 import { GlobalStyles } from '../constants/styles';
 import IconButton from '../components/IconButton';
 import { ExpensesContext } from '../store/expense-context';
+import ExpenseForm from '../components/ManageExpense/ExpenseForm';
 import Button from '../components/UI/Button';
 function ManageExpenses({route, navigation}){
   const editExpenseID = route.params?.expenseID;
@@ -36,10 +37,12 @@ function ManageExpenses({route, navigation}){
 
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttonContainer}>
         <Button style={styles.button} mode="flat" onPress={cancelHandler}>Cancel</Button>
         <Button style={styles.button} onPress={confirmHandler}>{ isEditing ? 'Update' : 'Add'}</Button>
       </View>
+
       { isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton icon="trash" color={GlobalStyles.colors.error500} size={36} onPress={deleteExpense}/>
@@ -67,7 +70,8 @@ const styles = StyleSheet.create({
   buttonContainer:{
     flexDirection: 'row',
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    marginTop:8
   },
   button:{
     minWidth:120,
