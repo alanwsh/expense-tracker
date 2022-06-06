@@ -30,6 +30,10 @@ function ManageExpenses({route, navigation}){
   }
 
   function confirmHandler(){
+    if(isEditing)
+      expensesCtx.updateExpense(editExpenseID, {description: 'Test!!', amount: 29.99, date: new Date('2022-06-03')});
+    else
+      expensesCtx.addExpense({description: 'Test', amount: 19, date: new Date('2022-05-19')});
     navigation.goBack();
   }
 
