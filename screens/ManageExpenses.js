@@ -18,10 +18,7 @@ function ManageExpenses({route, navigation}){
   }, [navigation, isEditing]);
 
   function deleteExpense(){
-    console.log('old ',expensesCtx.expenses);
-
     expensesCtx.deleteExpense(editExpenseID);
-    console.log('new ',expensesCtx.expenses);
     navigation.goBack();
   }
 
