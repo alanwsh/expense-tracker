@@ -1,10 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
 import {View, StyleSheet } from 'react-native';
 import { useLayoutEffect, useContext } from 'react';
 import { GlobalStyles } from '../constants/styles';
 import IconButton from '../components/IconButton';
 import { ExpensesContext } from '../store/expense-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
+import { storeExpense } from '../utils/http';
+
 function ManageExpenses({route, navigation}){
   const editExpenseID = route.params?.expenseID;
   const isEditing = !!editExpenseID;
@@ -27,11 +28,13 @@ function ManageExpenses({route, navigation}){
     navigation.goBack();
   }
 
-  function confirmHandler(expenseData){
+  async function confirmHandler(expenseData){
     if(isEditing)
         expensesCtx.updateExpense(editExpenseID, expenseData);
-    else
-        expensesCtx.addExpense(expenseData);
+    else{
+      const id = await storeExpense(expenseData);
+      expensesCtx.addExpense({...expenseData,id:id});
+    }
     navigation.goBack();
   }
 
