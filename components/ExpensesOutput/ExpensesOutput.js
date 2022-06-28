@@ -4,7 +4,6 @@ import ExpensesSummary from "./ExpensesSummary";
 
 function ExpensesOutput({expenses, expensesPeriod, fallbackText}){
   let content = <Text style={styles.infoText}>{fallbackText}</Text>;
-  console.log('expenses = ',expenses);
   if(expenses.length > 0)
     content = <ExpensesList expenses={expenses}/>
 
